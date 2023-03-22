@@ -46,11 +46,11 @@ public class TestMongoTemplate {
 	public String test1Mongo(@PathVariable String aa, @PathVariable String val,@PathVariable String newval) {
 		
 		Query query = new Query(Criteria.where(aa).is(val));
-		Mongotest mongotest=mongoTemplate.findOne(query,Mongotest.class, "TEST_COLLECTION");
+		Mongotest mongotest=mongoTemplate.findOne(query,Mongotest.class, "TEST_COLLECTION"); 
 		
 		System.err.println(mongotest.getId());
 		mongotest.setAa(newval);
-		mongoTemplate.save(mongotest);
+		mongoTemplate.save(mongotest); 
 		System.err.println(mongotest.toString());
 		return null;
 	}
@@ -58,9 +58,11 @@ public class TestMongoTemplate {
 	@GetMapping("/updateData/{aa}/{val}/{newval}")
 	public String test2Mongo(@PathVariable String aa, @PathVariable String val,@PathVariable String newval) {
 		
+		//No need to give explicitely @Id in entity
 		Query query = new Query(Criteria.where(aa).is(val));
 		Update update = new Update().set(aa, newval);
-		System.err.println(mongoTemplate.updateFirst(query, update, "TEST_COLLECTION"));
+		System.err.println(mongoTemplate.updateFirst(query, update, "TEST_COLLECTION")); // Check if the data was updated
+																						//Successfully or not
 		System.err.println("UPDATED");
 		
 		return null;
