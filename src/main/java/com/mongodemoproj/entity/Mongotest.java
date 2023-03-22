@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "TEST_COLLECTION")
 public class Mongotest {
 
-	@Id //Its important to keep this annotation for fetching the same document and updating the same.Else new document
+//	@Id //Its important to keep this annotation for fetching the same document and updating the same.Else new document
 		//Will be inserted during updation.
-	private String id;
+	private String id; // Keeping this wil also work --- with out annotation.
 	private String aa;
 	private String ss;
 	private String dd;

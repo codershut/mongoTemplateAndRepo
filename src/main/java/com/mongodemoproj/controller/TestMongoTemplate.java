@@ -48,7 +48,7 @@ public class TestMongoTemplate {
 		Query query = new Query(Criteria.where(aa).is(val));
 		Mongotest mongotest=mongoTemplate.findOne(query,Mongotest.class, "TEST_COLLECTION"); 
 		
-		System.err.println(mongotest.getId());
+//		System.err.println(mongotest.getId());
 		mongotest.setAa(newval);
 		mongoTemplate.save(mongotest); 
 		System.err.println(mongotest.toString());
@@ -69,11 +69,17 @@ public class TestMongoTemplate {
 	}
 	
 	
+	// USING THIS method ---------
+	// EITHER keep the annotation --- @ID
+	// OR keep the variable name as id for this to work---- varna ek naya document add ho jaayega
+	
 	@GetMapping("/getByRepo/{aa}/{val}")
 	public String test3Mongo(@PathVariable String aa, @PathVariable String val) {
 		
-		List<Mongotest> mongotest=mongoTestRepo.findByAaGreaterThan(val);
-		System.err.println(new JSONArray(mongotest));
+		Mongotest mongotest=mongoTestRepo.findByAa(val);
+//		System.err.println(new JSONArray(mongotest));
+		mongotest.setDd("TRUE");
+		mongoTestRepo.save(mongotest);
 		
 		return null;
 	}
